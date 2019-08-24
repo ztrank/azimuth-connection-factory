@@ -1,0 +1,1 @@
+export type Escape = (input: any) => string;

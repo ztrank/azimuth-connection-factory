@@ -1,0 +1,46 @@
+{
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/ztrank/azimuth-connection-factory#readme",
+  "license": "MIT",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "preversion": "npm test && npm run build && npm run lint",
+    "version": "git add -A src",
+    "lint": " tslint -p tsconfig.json",
+    "prepare": "",
+    "prepublishOnly": "npm test && npm run build && npm run lint",
+    "test": "jest",
+    "postversion": "git push && git push --tags",
+    "build": "rmdir dist /s /q && tsc"
+  },
+  "dependencies": {
+    "rxjs": "^6.5.2",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13"
+  },
+  "name": "azimuth-connection-factory",
+  "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
+    "typescript": "^3.5.3",
+    "ts-jest": "^24.0.2",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "jest": "^24.9.0",
+    "tslint": "^5.19.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3"
+  },
+  "version": "0.0.0",
+  "author": "ztrank",
+  "bugs": {
+    "url": "https://github.com/ztrank/azimuth-connection-factory/issues"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "url": "https://github.com/ztrank/azimuth-connection-factory.git",
+    "type": "git"
+  }
+}
