@@ -10,11 +10,13 @@ import { isSymbol } from 'util';
 
 export function ConnectionFactoryBind(
     container: Container,
+    appSettings: string | symbol | interfaces.Abstract<SecretService> | interfaces.Newable<SecretService>,
     secretService: string | symbol | interfaces.Abstract<SecretService> | interfaces.Newable<SecretService>,
     escapeId: string | symbol | Escape,
     createPool: string | symbol | CreatePool,
     errorHandler?: string | symbol | interfaces.Abstract<ErrorHandler> | interfaces.Newable<ErrorHandler>
 ): symbol {
+    container.bind(ConnectionFactorySymbols.AppSettings).toService(appSettings);
     container.bind(ConnectionFactorySymbols.SecretService).toService(secretService);
 
     if(typeof escapeId === 'string' || isSymbol(escapeId)) {

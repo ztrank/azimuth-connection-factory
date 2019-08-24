@@ -19,9 +19,9 @@ export class ConnectionFactoryImpl implements ConnectionFactory {
 
     public constructor(
         @inject(ConnectionFactorySymbols.SecretService) private secretService: SecretService,
-        @inject('AppSettings') private appSettings: AppSettings,
+        @inject(ConnectionFactorySymbols.AppSettings) private appSettings: AppSettings,
         @inject(ConnectionFactorySymbols.CreatePool) private createPool: CreatePool,
-        @inject(ConnectionFactorySymbols.Escape)private escapeId: Escape,
+        @inject(ConnectionFactorySymbols.Escape) private escapeId: Escape,
         @inject(ConnectionFactorySymbols.ErrorHandler) @optional() private errorHandler?: ErrorHandler
     ) {}
 
