@@ -4,7 +4,7 @@
 COMING SOON!
 
 ## Use
-1. Call `ConnectionFactoryBind(container, secretService, escapeId, createPool, errorHandler?)`
+1. Call `ConnectionFactoryBind(container, appSettingsSymbol, secretService, escapeId, createPool, errorHandler?)`
 2. Use the returned symbol to bind in any other plugin's Bind function.
 
 ### Binding Example
