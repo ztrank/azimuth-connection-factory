@@ -1,31 +1,39 @@
-import { Container } from 'inversify';
+import { Container, interfaces } from 'inversify';
 import { SecretService } from './interfaces/Secret.Service';
-import { Constructor } from './types/Constructor';
 import { ErrorHandler } from './interfaces/Error.Handler';
 import { Escape } from './types/Escape';
 import { CreatePool } from './types/Create.Pool';
 import { ConnectionFactorySymbols } from './symbols';
+import { ConnectionFactory } from './interfaces/Connection.Factory';
+import { ConnectionFactoryImpl } from './implementations/Connection.Factory';
+import { isSymbol } from 'util';
 
-function constantOrConstructor<T extends object, Y extends Constructor<T>, Z>(container: Container, sym: string | symbol, item: T|Y): void {
-    if(typeof item === 'function') {
-        container.bind<Z>(sym).to(<any>item);
-    } else {
-        container.bind<Z>(sym).toConstantValue(<any>item);
-    }
-}
-
-export function Bind(
+export function ConnectionFactoryBind(
     container: Container,
-    secretService: SecretService | Constructor<SecretService>,
-    escapeId: Escape,
-    createPool: CreatePool,
-    errorHandler?: ErrorHandler | Constructor<ErrorHandler>
-): void {
-    constantOrConstructor(container, ConnectionFactorySymbols.SecretService, secretService);
-    container.bind<Escape>(ConnectionFactorySymbols.Escape).toFunction(escapeId);
-    container.bind<CreatePool>(ConnectionFactorySymbols.CreatePool).toFunction(createPool);
+    secretService: string | symbol | interfaces.Abstract<SecretService> | interfaces.Newable<SecretService>,
+    escapeId: string | symbol | Escape,
+    createPool: string | symbol | CreatePool,
+    errorHandler?: string | symbol | interfaces.Abstract<ErrorHandler> | interfaces.Newable<ErrorHandler>
+): symbol {
+    container.bind(ConnectionFactorySymbols.SecretService).toService(secretService);
+
+    if(typeof escapeId === 'string' || isSymbol(escapeId)) {
+        container.bind(ConnectionFactorySymbols.Escape).toService(escapeId);
+    } else {
+        container.bind(ConnectionFactorySymbols.Escape).toFunction(escapeId);
+    }
+
+    if(typeof createPool === 'string' || isSymbol(createPool)) {
+        container.bind(ConnectionFactorySymbols.CreatePool).toService(createPool);
+    } else {
+        container.bind(ConnectionFactorySymbols.CreatePool).toFunction(createPool);
+    }
+    
 
     if(errorHandler) {
-        constantOrConstructor(container, ConnectionFactorySymbols.ErrorHandler, errorHandler);
+        container.bind(ConnectionFactorySymbols.ErrorHandler).toService(errorHandler);
     }
+
+    container.bind<ConnectionFactory>(ConnectionFactorySymbols.ConnectionFactory).to(ConnectionFactoryImpl).inSingletonScope();
+    return ConnectionFactorySymbols.ConnectionFactory;
 }
