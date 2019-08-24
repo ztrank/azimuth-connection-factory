@@ -1,7 +1,7 @@
 # azimuth-connection-factory
 
 ## Installation
-`npm install --save azimuth-connection-factory`
+COMING SOON!
 
 ## Use
 1. Call `ConnectionFactoryBind(container, secretService, escapeId, createPool, errorHandler?)`
