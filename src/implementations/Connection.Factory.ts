@@ -1,4 +1,8 @@
 import { injectable, inject, optional } from 'inversify';
+import { Observable, from, of } from 'rxjs';
+import { tap, map, mergeMap } from 'rxjs/operators';
+import { promisify } from 'util';
+import fs from 'fs';
 import { ConnectionFactory } from '../interfaces/Connection.Factory';
 import { Connection } from '../interfaces/Connection';
 import { AppSettings } from '../interfaces/Connection.Factory.Settings';
@@ -6,12 +10,8 @@ import { ErrorHandler } from '../interfaces/Error.Handler';
 import { Escape } from '../types/Escape';
 import { ConnectionFactorySymbols } from '../symbols';
 import { SecretService } from '../interfaces/Secret.Service';
-import { Observable, from, of } from 'rxjs';
-import { tap, map, mergeMap } from 'rxjs/operators';
-import { promisify } from 'util';
 import { CreatePool } from '../types/Create.Pool';
 import { ConnectionImpl } from './Connection.Impl';
-import fs from 'fs';
 
 @injectable()
 export class ConnectionFactoryImpl implements ConnectionFactory {
