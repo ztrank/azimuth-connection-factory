@@ -1,0 +1,5 @@
+{
+    "connectionFactory": {
+        "connections": "${connectionFactory.connections}"
+    }
+}

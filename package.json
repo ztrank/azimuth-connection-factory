@@ -5,7 +5,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-      "postinstall": "node ./dist/scripts/post.install.ts",
+    "postinstall": "node ./dist/scripts/post.install.js",
     "preversion": "npm test && npm run build && npm run lint",
     "version": "git add -A src",
     "lint": " tslint -p tsconfig.json",
@@ -16,7 +16,7 @@
     "build": "rmdir dist /s /q && tsc"
   },
   "dependencies": {
-    "@trankzachary/post-install-scripts": "^1.0.1",
+    "@trankzachary/pipeline": "^1.1.0",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2"
