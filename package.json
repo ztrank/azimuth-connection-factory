@@ -16,7 +16,7 @@
     "build": "rmdir dist /s /q && tsc"
   },
   "dependencies": {
-    "@trankzachary/pipeline": "^1.1.0",
+    "@trankzachary/pipeline": "../pipeline",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2"
