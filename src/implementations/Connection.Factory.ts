@@ -12,14 +12,15 @@ import { ConnectionFactorySymbols } from '../symbols';
 import { SecretService } from '../interfaces/Secret.Service';
 import { CreatePool } from '../types/Create.Pool';
 import { ConnectionImpl } from './Connection.Impl';
+import { TYPES } from '../service-references/azimuth-types';
 
 @injectable()
 export class ConnectionFactoryImpl implements ConnectionFactory {
     private readonly connections: Map<string, Connection> = new Map<string, Connection>();
 
     public constructor(
-        @inject(ConnectionFactorySymbols.SecretService) private secretService: SecretService,
-        @inject(ConnectionFactorySymbols.AppSettings) private appSettings: AppSettings,
+        @inject(TYPES.SecretService) private secretService: SecretService,
+        @inject(TYPES.AppSettings) private appSettings: AppSettings,
         @inject(ConnectionFactorySymbols.CreatePool) private createPool: CreatePool,
         @inject(ConnectionFactorySymbols.Escape) private escapeId: Escape,
         @inject(ConnectionFactorySymbols.ErrorHandler) @optional() private errorHandler?: ErrorHandler
