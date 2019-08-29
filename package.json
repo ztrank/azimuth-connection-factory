@@ -31,7 +31,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3"
   },
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "ztrank",
   "bugs": {
     "url": "https://github.com/ztrank/azimuth-connection-factory/issues"
