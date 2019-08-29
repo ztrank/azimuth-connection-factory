@@ -21,7 +21,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.2"
   },
-  "name": "azimuth-connection-factory",
+  "name": "@project-azimuth/azimuth-connection-factory",
   "devDependencies": {
     "@babel/preset-env": "^7.5.5",
     "typescript": "^3.5.3",
